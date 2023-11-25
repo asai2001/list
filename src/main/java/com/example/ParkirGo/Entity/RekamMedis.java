@@ -1,5 +1,6 @@
 package com.example.ParkirGo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,6 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Embeddable
 @Table(name = "rekam_medis")
 public class RekamMedis {
     @Id
@@ -18,9 +18,9 @@ public class RekamMedis {
     private Integer rekamId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    List<Users> userss;
-
+    @JoinColumn(name = "users_id")
+    @JsonIgnore // Menghindari pencetakan tak terbatas dengan mengabaikan relasi ini
+    Users users;
     @Column(name = "diagnosa")
     private String diagnosa;
 }

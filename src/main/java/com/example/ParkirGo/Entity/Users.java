@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "users")
-
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,8 +39,11 @@ public class Users {
     @Column(name = "password")
     private String password;
 
-//    @OneToMany(mappedBy = "rekam_id", cascade = CascadeType.ALL)
+//    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 //    List<RekamMedis> rekamMedis;
+
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    List<RekamMedis> rekamMedisList;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_role",
