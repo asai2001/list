@@ -1,4 +1,4 @@
-package com.simft.simft.encryption;
+package com.example.ParkirGo.encryption;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

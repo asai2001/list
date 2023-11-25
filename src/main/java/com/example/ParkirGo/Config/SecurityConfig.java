@@ -1,4 +1,4 @@
-//package com.simft.simft.Config;
+package com.example.ParkirGo.Config;//package com.simft.simft.Config;
 //
 //
 //import lombok.RequiredArgsConstructor;
