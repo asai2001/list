@@ -13,19 +13,19 @@ import java.util.Date;
 @Table(name = "pendaftaran")
 public class Pendaftaran {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "daftar_id")
-    private Integer daftarId;
+    private String daftarId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "rekam_id")
-    private RekamMedis rekamMediss;
+    private RekamMedis rekamMedis;
 
     @Column(name = "keluhan")
     private String keluhan;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "mens_terakhir")
-    private Date mensTerakhir;
+    private String mensTerakhir;
 
 }

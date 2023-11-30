@@ -8,7 +8,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class PendaftaranDto {
-    private Integer daftarId;
+    private String daftarId;
     private String keluhan;
-    private Date mensTerakhir;
+    private String mensTerakhir;
 }

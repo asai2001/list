@@ -8,6 +8,8 @@ import com.example.ParkirGo.encryption.Vigenere64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class UserService {
     @Autowired
@@ -17,7 +19,13 @@ public class UserService {
 //        Caesar64 caesar64 = new Caesar64();
         Vigenere64 vigenere64 = new Vigenere64();
         Users users = new Users();
-        //enc
+
+        //Mendapatkan UserId terakhir dari database
+        String uuid = generateShortUUID();
+
+        //encrypt Vigenere
+        String encryptUserId = vigenere64.encrypt(uuid, "aris");
+        users.setUserId(encryptUserId);
         String encryptNama = vigenere64.encrypt(usersDto.getNamaLengkap(), "aris");
         users.setNamaLengkap(encryptNama);
         String encryptNamaSuami = vigenere64.encrypt(usersDto.getNamaSuami(), "aris");
@@ -33,7 +41,12 @@ public class UserService {
         return userRepo.save(users);
     }
 
-    public Users user_update (UsersDto usersDto, int user_id) {
+    private String generateShortUUID() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.substring(0, 7);
+    }
+
+    public Users user_update (UsersDto usersDto, String user_id) {
         Users userUpdate = userRepo.findByUserId(user_id);
         userUpdate.setNamaLengkap(usersDto.getNamaLengkap());
         userUpdate.setNamaSuami(usersDto.getNamaSuami());

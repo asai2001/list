@@ -10,7 +10,7 @@ import java.util.Date;
 @Setter
 public class UsersDto {
 
-    private Integer userId;
+    private String userId;
     private String namaLengkap;
     private String namaSuami;
     private String umur;

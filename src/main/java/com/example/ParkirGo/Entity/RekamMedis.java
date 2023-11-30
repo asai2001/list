@@ -13,14 +13,15 @@ import java.util.List;
 @Table(name = "rekam_medis")
 public class RekamMedis {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rekam_id")
-    private Integer rekamId;
+    private String rekamId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
     @JsonIgnore // Menghindari pencetakan tak terbatas dengan mengabaikan relasi ini
     Users users;
+
     @Column(name = "diagnosa")
     private String diagnosa;
 }
