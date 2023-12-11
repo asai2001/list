@@ -12,9 +12,9 @@ import javax.persistence.*;
 
 public class Admin {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "admin_id")
-    private Integer adminId;
+    private String adminId;
 
     @Column(name = "nama")
     private String nama;

@@ -11,5 +11,5 @@ import java.util.List;
 @Transactional
 public interface AdminRepo extends JpaRepository<Admin, Integer> {
     List<Admin> findAll();
-    Admin findByAdminId (int adminId);
+    Admin findByAdminId (String adminId);
 }

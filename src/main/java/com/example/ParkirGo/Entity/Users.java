@@ -32,11 +32,14 @@ public class Users {
     @Column(name = "no_telp")
     private String noTelp;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    private String role;
 
 //    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 //    List<RekamMedis> rekamMedis;

@@ -24,15 +24,17 @@ public class PendaftraanService {
         Pendaftaran daftar = new Pendaftaran();
         Vigenere64 vigenere64 = new Vigenere64();
 
-        RekamMedis rekamMedis = rekamRepo.findByRekamId(daftar.getRekamMedis().getRekamId());
+        final String key = "aris";
+
+        RekamMedis rekamMedis = rekamRepo.findByRekamId(pendaftaranDto.getRekamMedis().getRekamId());
 
         String uuid = generateShortUUID();
 
-        String encryptDaftarId = vigenere64.encrypt(uuid, "aris");
+        String encryptDaftarId = vigenere64.encrypt(uuid, key);
         daftar.setDaftarId(encryptDaftarId);
-        String encryptKeluhan = vigenere64.encrypt(pendaftaranDto.getKeluhan(), "aris");
+        String encryptKeluhan = vigenere64.encrypt(pendaftaranDto.getKeluhan(), key);
         daftar.setKeluhan(encryptKeluhan);
-        String encryptMens = vigenere64.encrypt(pendaftaranDto.getMensTerakhir(), "aris");
+        String encryptMens = vigenere64.encrypt(pendaftaranDto.getMensTerakhir(), key);
         daftar.setMensTerakhir(encryptMens);
         daftar.setRekamMedis(rekamMedis);
         return pendaftaranRepo.save(daftar);

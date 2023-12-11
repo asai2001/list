@@ -17,5 +17,6 @@ public class UsersDto {
     private String noTelp;
     private String email;
     private String password;
+    private String role;
 
 }

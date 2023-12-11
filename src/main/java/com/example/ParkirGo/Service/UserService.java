@@ -15,28 +15,34 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-    public Users user (UsersDto usersDto) {
-//        Caesar64 caesar64 = new Caesar64();
+    public Users registUser (UsersDto usersDto) {
+        if (isUserAlreadyRegistered(usersDto.getEmail())) {
+            throw new RuntimeException("Pengguna dengan email tersebut sudah digunakan");
+        }
+
+
         Vigenere64 vigenere64 = new Vigenere64();
         Users users = new Users();
+
+        final String key = "aris";
 
         //Mendapatkan UserId terakhir dari database
         String uuid = generateShortUUID();
 
         //encrypt Vigenere
-        String encryptUserId = vigenere64.encrypt(uuid, "aris");
+        String encryptUserId = vigenere64.encrypt(uuid, key);
         users.setUserId(encryptUserId);
-        String encryptNama = vigenere64.encrypt(usersDto.getNamaLengkap(), "aris");
+        String encryptNama = vigenere64.encrypt(usersDto.getNamaLengkap(), key);
         users.setNamaLengkap(encryptNama);
-        String encryptNamaSuami = vigenere64.encrypt(usersDto.getNamaSuami(), "aris");
+        String encryptNamaSuami = vigenere64.encrypt(usersDto.getNamaSuami(), key);
         users.setNamaSuami(encryptNamaSuami);
-        String encryptUmur = vigenere64.encrypt(usersDto.getUmur(), "aris");
+        String encryptUmur = vigenere64.encrypt(usersDto.getUmur(), key);
         users.setUmur(encryptUmur);
-        String encryptNoTelp = vigenere64.encrypt(usersDto.getNoTelp(), "aris");
+        String encryptNoTelp = vigenere64.encrypt(usersDto.getNoTelp(), key);
         users.setNoTelp(encryptNoTelp);
-        String encryptEmail = vigenere64.encrypt(usersDto.getEmail(), "aris");
+        String encryptEmail = vigenere64.encrypt(usersDto.getEmail(), key);
         users.setEmail(encryptEmail);
-        String encryptPass = vigenere64.encrypt(usersDto.getPassword(), "aris");
+        String encryptPass = vigenere64.encrypt(usersDto.getPassword(), key);
         users.setPassword(encryptPass);
         return userRepo.save(users);
     }
@@ -44,6 +50,10 @@ public class UserService {
     private String generateShortUUID() {
         String uuid = UUID.randomUUID().toString();
         return uuid.substring(0, 7);
+    }
+
+    private boolean isUserAlreadyRegistered(String email) {
+        return userRepo.existsByEmail(email);
     }
 
     public Users user_update (UsersDto usersDto, String user_id) {

@@ -1,5 +1,6 @@
 package com.example.ParkirGo.Dto;
 
+import com.example.ParkirGo.Entity.RekamMedis;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,4 +12,5 @@ public class PendaftaranDto {
     private String daftarId;
     private String keluhan;
     private String mensTerakhir;
+    private RekamMedis rekamMedis;
 }

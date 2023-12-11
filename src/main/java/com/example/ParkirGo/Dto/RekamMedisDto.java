@@ -9,5 +9,5 @@ import lombok.Setter;
 public class RekamMedisDto {
     private String rekamId;
     private String diagnosa;
-    private Users userId;
+    private Users users;
 }

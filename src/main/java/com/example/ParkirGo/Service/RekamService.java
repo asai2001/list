@@ -23,13 +23,15 @@ public class RekamService {
         RekamMedis rekamMedis = new RekamMedis();
         Vigenere64 vigenere64 = new Vigenere64();
 
+        final String key = "aris";
+
         String uuid = generateShortUUID();
 
-        Users users = userRepo.findByUserId(rekamMedisDto.getUserId().getUserId());
+        Users users = userRepo.findByUserId(rekamMedisDto.getUsers().getUserId());
 
-        String encryptRekamId = vigenere64.encrypt(uuid, "aris");
+        String encryptRekamId = vigenere64.encrypt(uuid, key);
         rekamMedis.setRekamId(encryptRekamId);
-        String encryptDiagnosa = vigenere64.encrypt(rekamMedisDto.getDiagnosa(), "aris");
+        String encryptDiagnosa = vigenere64.encrypt(rekamMedisDto.getDiagnosa(), key);
         rekamMedis.setDiagnosa(encryptDiagnosa);
         rekamMedis.setUsers(users);
         return rekamRepo.save(rekamMedis);
