@@ -1,6 +1,7 @@
 package com.example.ParkirGo.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,19 +14,25 @@ import java.util.Date;
 @Table(name = "pendaftaran")
 public class Pendaftaran {
     @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "daftar_id")
     private String daftarId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "rekam_id")
-    private RekamMedis rekamMedis;
+    @JoinColumn(name = "user_id")
+    @JsonIgnore // Menghindari pencetakan tak terbatas dengan mengabaikan relasi ini
+    Users users;
 
-    @Column(name = "keluhan")
-    private String keluhan;
+    @ManyToOne(cascade =CascadeType.ALL)
+    @JoinColumn(name = "dokter_id")
+    Dokter dokter;
+
+    @Column(name = "tgl_daftar")
+    private String tglDaftar;
+
+
+
+
 
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    @Column(name = "mens_terakhir")
-    private String mensTerakhir;
 
 }

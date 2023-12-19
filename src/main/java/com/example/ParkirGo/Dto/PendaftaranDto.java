@@ -1,6 +1,8 @@
 package com.example.ParkirGo.Dto;
 
+import com.example.ParkirGo.Entity.Dokter;
 import com.example.ParkirGo.Entity.RekamMedis;
+import com.example.ParkirGo.Entity.Users;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +12,7 @@ import java.util.Date;
 @Setter
 public class PendaftaranDto {
     private String daftarId;
-    private String keluhan;
-    private String mensTerakhir;
-    private RekamMedis rekamMedis;
+    private Users users;
+    private Dokter dokter;
+    private String tglDaftar;
 }

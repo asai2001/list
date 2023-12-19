@@ -5,6 +5,7 @@ import com.example.ParkirGo.Entity.Admin;
 import com.example.ParkirGo.Repository.AdminRepo;
 import com.example.ParkirGo.encryption.Vigenere64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -33,11 +34,14 @@ public class AdminService {
         String encryptAlamat = vigenere64.encrypt(adminDto.getAlamat(), key);
         admin.setAlamat(encryptAlamat);
 
+        admin.setRole("ADMIN");
+
         String encryptEmail = vigenere64.encrypt(adminDto.getEmail(), key);
         admin.setEmail(encryptEmail);
 
-        String encryptPassword = vigenere64.encrypt(adminDto.getPassword(), key);
-        admin.setPassword(encryptPassword);
+        String plainPassword = adminDto.getPassword();
+        String hashPassword = encodePassword(plainPassword);
+        admin.setPassword(hashPassword);
         return adminRepo.save(admin);
     }
 
@@ -45,5 +49,10 @@ public class AdminService {
     private String generateShortUUID() {
         String uuid = UUID.randomUUID().toString();
         return uuid.substring(0, 7);
+    }
+
+    private static String encodePassword(String plainPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        return passwordEncoder.encode(plainPassword);
     }
 }

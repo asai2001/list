@@ -18,9 +18,14 @@ public class RekamMedis {
     private String rekamId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
-    @JsonIgnore // Menghindari pencetakan tak terbatas dengan mengabaikan relasi ini
-    Users users;
+    @JoinColumn(name = "daftar_id")
+    private Pendaftaran pendaftaran;
+
+    @Column(name = "keluhan")
+    private String keluhan;
+
+    @Column(name = "mens_terakhir")
+    private String mensTerakhir;
 
     @Column(name = "diagnosa")
     private String diagnosa;

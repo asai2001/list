@@ -41,11 +41,10 @@ public class Users {
     @Column(name = "role")
     private String role;
 
-//    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-//    List<RekamMedis> rekamMedis;
 
-    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
-    List<RekamMedis> rekamMedisList;
+
+//    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+//    List<Pendaftaran> daftar;
 
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @JoinTable(name = "user_role",

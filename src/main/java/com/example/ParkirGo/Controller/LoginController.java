@@ -1,6 +1,8 @@
 package com.example.ParkirGo.Controller;
 
 import com.example.ParkirGo.Dto.LoginDto;
+import com.example.ParkirGo.Dto.UsersDto;
+import com.example.ParkirGo.Entity.Users;
 import com.example.ParkirGo.Service.Impl.UserLoginServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +16,11 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     @Autowired
-    private UserLoginServiceImpl userLoginService;
+    UserLoginServiceImpl userLoginService;
 
-    @PostMapping("/auth/login")
-    public ResponseEntity<?> loginUser (@RequestBody LoginDto loginDto) {
-        try {
-            String role = userLoginService.authenticateUser(loginDto);
-
-            if (role != null) {
-                return ResponseEntity.ok(role);
-            } else {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login Failed");
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed");
-        }
+    @PostMapping("/login")
+    public ResponseEntity<?> login (@RequestBody UsersDto usersDto) {
+        Users userLogin = userLoginService.findByEmail(usersDto.getEmail());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

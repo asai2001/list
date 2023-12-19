@@ -1,8 +1,10 @@
 package com.example.ParkirGo.Service;
 
 import com.example.ParkirGo.Dto.RekamMedisDto;
+import com.example.ParkirGo.Entity.Pendaftaran;
 import com.example.ParkirGo.Entity.RekamMedis;
 import com.example.ParkirGo.Entity.Users;
+import com.example.ParkirGo.Repository.PendaftaranRepo;
 import com.example.ParkirGo.Repository.RekamRepo;
 import com.example.ParkirGo.Repository.UserRepo;
 import com.example.ParkirGo.encryption.Vigenere64;
@@ -17,7 +19,7 @@ public class RekamService {
     RekamRepo rekamRepo;
 
     @Autowired
-    UserRepo userRepo;
+    PendaftaranRepo pendaftaranRepo;
 
     public RekamMedis rekamMedis(RekamMedisDto rekamMedisDto){
         RekamMedis rekamMedis = new RekamMedis();
@@ -27,13 +29,17 @@ public class RekamService {
 
         String uuid = generateShortUUID();
 
-        Users users = userRepo.findByUserId(rekamMedisDto.getUsers().getUserId());
+        Pendaftaran pendaftaran = pendaftaranRepo.findByDaftarId(rekamMedisDto.getPendaftaran().getDaftarId());
 
         String encryptRekamId = vigenere64.encrypt(uuid, key);
         rekamMedis.setRekamId(encryptRekamId);
         String encryptDiagnosa = vigenere64.encrypt(rekamMedisDto.getDiagnosa(), key);
         rekamMedis.setDiagnosa(encryptDiagnosa);
-        rekamMedis.setUsers(users);
+        String encryptKeluhan = vigenere64.encrypt(rekamMedisDto.getKeluhan(), key);
+        rekamMedis.setKeluhan(encryptKeluhan);
+        String encryptMens = vigenere64.encrypt(rekamMedisDto.getMensTerakhir(), key);
+        rekamMedis.setMensTerakhir(encryptMens);
+        rekamMedis.setPendaftaran(pendaftaran);
         return rekamRepo.save(rekamMedis);
     }
 

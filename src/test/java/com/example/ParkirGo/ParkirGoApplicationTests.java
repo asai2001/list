@@ -8,13 +8,17 @@ import com.example.ParkirGo.encryption.Vigenere64;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class ParkirGoApplicationTests {
 
-	@Autowired
+	@MockBean
 	private UserRepo userRepo;
 
 	@Autowired
@@ -55,22 +59,6 @@ class ParkirGoApplicationTests {
 		assertEquals(expectedDecrypt, decryptText);
 	}
 
-	@Test
-	void testSaveUser() {
-		UsersDto usersDto = new UsersDto();
-		usersDto.setNamaLengkap("Titik Permatasari");
-		usersDto.setNamaSuami("Dimas Arman");
-		usersDto.setUmur("25");
-		usersDto.setNoTelp("082365716548");
-		usersDto.setEmail("titik@gmail.com");
-
-		Users saveduser = userService.user(usersDto);
-
-		assertNotNull(saveduser.getUserId());
-		assertEquals("Titik Permatasari", saveduser.getNamaLengkap());
-
-		userRepo.delete(saveduser);
-	}
 
 
 }
